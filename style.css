@@ -1,0 +1,29 @@
+li {
+    list-style: none;
+    font-size: 1em;
+}
+body {
+    font-size: 18px;
+}
+h1 {
+    text-align: center;
+}
+.buttons__list {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 375px;
+    margin: 0 auto;
+    padding: 0;
+}
+.btn {
+    background: aqua;
+    margin: 10px;
+    flex: 0 1 calc(100% / 2 - 20px);
+    text-align: center;
+}
+.btn__choice {
+    flex: calc(100% - 20px);
+}
+.btn.active {
+    background-color: red;
+}
