@@ -12,11 +12,12 @@ function reset () {
 }
 
 function selectDays () {
-    reset()
     btnDay.forEach((item) => {
         if (this.dataset.type === 'alldays') {
             btn.forEach(item => {
-                item.classList.add('active')
+                if (!this.classList.contains('active')) {
+                    item.classList.add('active')
+                } else item.classList.remove('active')
             })
         }
         if (item.classList.contains(this.dataset.type)) {
