@@ -6,6 +6,7 @@ const btnWeekday = document.querySelector('.weekday__choice');
 const btnWeekend = document.querySelector('.weekend__choice');
 let weekendsCount;
 let weekdaysCount;
+let isActive = false;
 
 function reset () {
     btn.forEach(item => {
@@ -26,14 +27,15 @@ function check () {
     weekendsCount = 0;
     weekdaysCount = 0;
     btnDay.forEach(item => {
-        if (item.classList.contains('active') && item.classList.contains('weekday')) weekdaysCount++;
-        if (item.classList.contains('active') && item.classList.contains('weekend')) weekendsCount++;
+        if (item.classList.contains('active')) {
+            if (item.classList.contains('weekday')) weekdaysCount++;
+            if (item.classList.contains('weekend')) weekendsCount++;
+        }
     });
-    if (weekdaysCount === 5) btnWeekday.classList.add('active');
-    if (weekendsCount === 2) btnWeekend.classList.add('active');
-    if (weekendsCount === 2 && weekdaysCount === 5) btnAll.classList.add('active')
+    if (weekdaysCount === 5 && weekendsCount === 0) btnWeekday.classList.add('active');
+    if (weekendsCount === 2 && weekdaysCount === 0) btnWeekend.classList.add('active');
+    if (weekendsCount === 2 && weekdaysCount === 5) btn.forEach(item => item.classList.add('active'))
 }
-
 
 
 
@@ -46,19 +48,30 @@ function reset () {
 
 function selectDays () {
     if (this.dataset.type === 'weekday') {
-        reset()
-        if (!this.classList.contains('active')) this.classList.add('active');
-        else (this.classList.remove('active'))
-        document.querySelectorAll('.weekday').forEach(item => item.classList.toggle('active'))
+       reset()
+            this.classList.add('active');
+            document.querySelectorAll('.weekday').forEach(item => item.classList.add('active'))
     }
     if (this.dataset.type === 'weekend') {
         reset()
-        if (!this.classList.contains('active')) this.classList.add('active');
-        else (this.classList.remove('active'))
-        document.querySelectorAll('.weekend').forEach(item => item.classList.toggle('active'))
+        if (this.classList.contains('active')) {
+            this.classList.remove('active');
+            document.querySelectorAll('.weekend').forEach(item => item.classList.remove('active'))
+        }
+        else {
+            this.classList.add('active');
+            document.querySelectorAll('.weekend').forEach(item => item.classList.add('active'))
+        }
     }
     if (this.dataset.type === 'alldays') {
-        btn.forEach(item => item.classList.toggle('active'))
+        if (this.classList.contains('active')) {
+            this.classList.remove('active');
+            btn.forEach(item => item.classList.remove('active'))
+        }
+        else {
+            this.classList.add('active');
+            btn.forEach(item => item.classList.add('active'))
+        }
     }
 }
 
