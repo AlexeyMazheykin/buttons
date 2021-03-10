@@ -41,11 +41,12 @@ function addActive (type) {
     })
 }
 function selectDays() {
+
     let type = this.dataset.type;
         if (!isActive) {
             addActive.call(this, type)
             isActive = !isActive
-        } else if (isActive && !this.classList.contains('active') || btnAll.classList.contains('active')) {
+        } else if (isActive && !this.classList.contains('active') || this !== btnAll && btnAll.classList.contains('active')) {
             reset()
             addActive.call(this, type)
         } else {
